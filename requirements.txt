@@ -1,2 +1,3 @@
 git+https://github.com/banteg/ape-safe@master#egg=ape-safe
 eth-brownie>=1.18.2,<2.0.0
+eth_abi
