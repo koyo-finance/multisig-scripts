@@ -14,14 +14,14 @@ def _tx_params(gas_limit: int = None):
 
 def main():
     wETH = interface.ERC20("0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000")
-    frax = interface.ERC20("0x7562F525106F5d54E891e005867Bf489B5988CD9")
+    kyo = interface.ERC20("0x618CC6549ddf12de637d46CDDadaFC0C2951131C")
 
     vault = interface.Vault("0x2A4409Cc7d2AE7ca1E3D915337D1B6Ba2350D6a3")
-    frax_pool = interface.OracleWeightedPool(
-        "0x5EC75124616Dc136dEa5560A59512404a133209b"
+    kyo_pool = interface.OracleWeightedPool(
+        "0xf425eD6a3d48bf765853c8cD3Bf4B697af8D3B04"
     )
 
-    frax_pool_id = frax_pool.getPoolId()
+    kyo_pool_id = kyo_pool.getPoolId()
 
     user_data = eth_abi.encode_abi(
         ["uint256"],
@@ -29,12 +29,11 @@ def main():
     )
 
     wETH_balance = wETH.balanceOf(DEPLOYER)
-    frax_balance = frax.balanceOf(DEPLOYER)
     # wETH.approve(vault, int(Decimal(1) * DECIMALS), _tx_params(5_000_000))
-    frax.approve(vault, int(Decimal(100_000) * DECIMALS), _tx_params(5_000_000))
+    # frax.approve(vault, int(Decimal(106.727) * DECIMALS), _tx_params(5_000_000))
 
     vault.swap(
-        (frax_pool_id, 0, frax, wETH, frax_balance, user_data),
+        (kyo_pool_id, 0, wETH, kyo, wETH_balance / 4, user_data),
         (DEPLOYER, False, DEPLOYER, False),
         0,
         int(1655379114),
