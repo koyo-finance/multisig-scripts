@@ -9,3 +9,5 @@ cache/
 artifacts/
 typechain/
 .pytest_cache
+
+.DS_Store
